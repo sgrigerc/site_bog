@@ -2,18 +2,29 @@
 
 {% block title %}My Blog{% endblock %}
 
+
 {% block content %}
-    <h1>My Blog</h1>
-    {% for post in posts %}
-        <h2>
-            <a href="{{ post.get_asolute_url}}">
-                {{ post.title }}
-            </a>
-        </h2>
-        <p class="date">
-            Published {{ post.publish }} by {{ post.author }}
-        </p>
-        {{ post.body|truncatewords:30|linebreaks }}
-    {% endfor %}
-    {% include "pagination.html" with page=page_obj %}
+    <div class="container overflow-hidden text-left " style="width: 810px;">
+        <div class="text-center mt-5">
+            <h1>My Blog</h1>
+        </div>
+        {% for post in posts %}
+            <div class="container-md rounded border border-primary mt-3 bg-light text-dark" style="width: 800px;">
+                    <h2>
+                        <div class="p-3">
+                            <a href="{{ post.get_asolute_url}}">
+                                {{ post.title }}
+                            </a>
+                        </div>
+                    </h2>
+                    <p class="date">
+                        Published {{ post.publish }} by {{ post.author }}
+                    </p>
+                    {{ post.body|truncatewords:30|linebreaks }}
+            </div>
+        {% endfor %}
+        <div class="mt-5">   
+            {% include "pagination.html" with page=page_obj %}
+        </div> 
+    </div>
 {% endblock %}

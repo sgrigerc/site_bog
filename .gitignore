@@ -1,2 +1,2 @@
-venv
-tools
+.*
+mysite/blog/__pychache__
