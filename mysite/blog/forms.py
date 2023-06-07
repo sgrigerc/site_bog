@@ -1,4 +1,5 @@
 from django import forms
+from .models import Comment
 
 class EmailPostForm(forms.Form):
     name = forms.CharField(
@@ -21,3 +22,9 @@ class EmailPostForm(forms.Form):
                             label='Комментарий получателю',
                             required=False,
                             widget=forms.Textarea(attrs={'class': 'form-control mb-3', 'placeholder': 'Введите текст...'}))
+    
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['name','email','body']
+

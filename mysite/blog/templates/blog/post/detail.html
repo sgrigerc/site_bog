@@ -3,14 +3,42 @@
 {% block title %}{{ post.title }}{% endblock %}
 
 {% block content %}
-    <h1>{{ post.title }}</h1>
-    <p class="date">
-        Published {{ post.publish }} by {{ post.author }}
-    </p>
-    {{ post.body|linebreaks }}
-    <p>
-        <a href="{% url 'blog:post_share' post.id %}">
-            Share this post
-        </a>
-    </p>
+<div class="container overflow-hidden text-break" style="width: 800px;">
+    <div class="container-md rounded border border-primary mt-3 bg-light text-dark">
+        <div class="p-3">
+            <h1>{{ post.title }}</h1>
+        </div>
+        <p class="date fw-bolder">
+            Published {{ post.publish }} by {{ post.author }}
+        </p>
+        {{ post.body|linebreaks }}
+        <div class="d-grid d-md-flex justify-content-md-end mb-3">
+            <a href="{% url 'blog:post_share' post.id %}" class="btn btn-primary btn-lg">
+                Share this post
+            </a>
+        </div>
+    </div>
+    <div class="container-md mt-5 container-md rounded border mt-3 bg-light text-dark">
+        {% with comments.count as total_comments %}
+            <h2>
+                {{ total_comments }} comment {{ total_comments|pluralize }}
+            </h2>
+        {% endwith %}
+        <div class="mt-2">
+            {% for comment in comments %}
+            <div class="comment container-md rounded border mt-3 mb-5 bg-light text-dark">
+                <p class="info">
+                    Comment {{ forloop.counter }} by {{ comment.name }}
+                    {{ comment.created }}
+                </p>
+                {{ comment.body|linebreaks }}
+            </div>
+                {% empty %}
+                    <p>There are no comments.</p>
+            {% endfor %}
+                {% include "blog/post/include/comment_form.html" %}
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %} 

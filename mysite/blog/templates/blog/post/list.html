@@ -7,17 +7,17 @@
     <div class="container overflow-hidden text-left " style="width: 810px;">
         <div class="text-center mt-5">
             <h1>My Blog</h1>
-        </div>
+        </div></div>
         {% for post in posts %}
-            <div class="container-md rounded border border-primary mt-3 bg-light text-dark" style="width: 800px;">
+            <div class="container-md rounded border border-primary mt-3 bg-light text-dark text-break" style="width: 800px;">
                     <h2>
-                        <div class="p-3">
+                        <div class="p-3 ">
                             <a href="{{ post.get_absolute_url}}">
                                 {{ post.title }}
                             </a>
                         </div>
                     </h2>
-                    <p class="date">
+                    <p class="date fw-bolder">
                         Published {{ post.publish }} by {{ post.author }}
                     </p>
                     {{ post.body|truncatewords:30|linebreaks }}
