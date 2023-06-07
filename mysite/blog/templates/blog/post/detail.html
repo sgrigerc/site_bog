@@ -17,6 +17,14 @@
                 Share this post
             </a>
         </div>
+        <h2>Похожие посты</h2>
+        {% for post in similar_posts %}
+            <p>
+                <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+            </p>
+            {% empty %}
+            Похожих постов пока нет.
+        {% endfor %}
     </div>
     <div class="container-md mt-5 container-md rounded border mt-3 bg-light text-dark">
         {% with comments.count as total_comments %}
